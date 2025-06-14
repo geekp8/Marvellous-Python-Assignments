@@ -1,0 +1,9 @@
+Check how to remove blank lines
+
+
+
+
+
+
+And close the file
+
