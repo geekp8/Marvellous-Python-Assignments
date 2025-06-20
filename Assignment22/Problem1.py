@@ -8,14 +8,14 @@ from email.message import EmailMessage
 from datetime import datetime
 
 
-def setup_logger(log_file):
+def SetupLogger(log_file):
     logging.basicConfig(filename=log_file,
                         level=logging.INFO,
                         format='%(asctime)s - %(message)s')
 
 
-def hash_file(path, blocksize=65536):
-    hasher = hashlib.md5()
+def HashFile(path, blocksize=65536):
+    hasher = hashlib.sha1()
     try:
         with open(path, 'rb') as afile:
             buf = afile.read(blocksize)
@@ -27,7 +27,7 @@ def hash_file(path, blocksize=65536):
         return None
     return hasher.hexdigest()
 
-def remove_duplicates(target_dir, log_file):
+def RemoveDuplicates(target_dir, log_file):
     scanned = 0
     duplicates = 0
     hash_dict = {}
@@ -36,7 +36,7 @@ def remove_duplicates(target_dir, log_file):
         for filename in filenames:
             full_path = os.path.join(foldername, filename)
             scanned += 1
-            file_hash = hash_file(full_path)
+            file_hash = HashFile(full_path)
             if file_hash:
                 if file_hash in hash_dict:
                     try:
@@ -51,7 +51,7 @@ def remove_duplicates(target_dir, log_file):
     return scanned, duplicates
 
 
-def send_email(log_file, to_email, start_time, scanned, duplicates):
+def SendEmail(log_file, to_email, start_time, scanned, duplicates):
     msg = EmailMessage()
     msg['Subject'] = 'Duplicate File Removal Report'
     msg['From'] = 'pathakmana98@gmail.com'  # replace with sender email
@@ -98,12 +98,12 @@ def main():
         start_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_file_name = f"Log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
         log_file_path = os.path.join(marvellous_dir, log_file_name)
-        setup_logger(log_file_path)
+        SetupLogger(log_file_path)
 
         logging.info(f"Started duplicate file removal in: {target_dir}")
-        scanned, duplicates = remove_duplicates(target_dir, log_file_path)
+        scanned, duplicates = RemoveDuplicates(target_dir, log_file_path)
 
-        send_email(log_file_path, email_id, start_time, scanned, duplicates)
+        SendEmail(log_file_path, email_id, start_time, scanned, duplicates)
 
         time.sleep(interval)
 
