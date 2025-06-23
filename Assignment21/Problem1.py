@@ -38,9 +38,15 @@ def SendMail(log_file, to_email):
     msg = EmailMessage()
     msg['Subject'] = 'Process Info Log File'
     msg['From'] = 'pathakmana98@gmail.com'  
-    msg['To'] = 'pathakmana98@gmail.com'
+    msg['To'] = 'marvellousinfosystems@gmail.com'
 
-    msg.set_content('Attached is the log file containing process information.')
+
+    msg.set_content("""Hello Piyush Sir,
+                    Attached is the log file containing process information.
+                    Assignment21
+                    From-Manasi Pathak 
+                    Id-PM-244
+                    """)
 
     with open(log_file, 'rb') as f:
         file_data = f.read()
@@ -49,7 +55,7 @@ def SendMail(log_file, to_email):
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
             smtp.starttls()
-            smtp.login('pathakmana98@gmail.com', 'Wishescometrue#7') 
+            smtp.login('pathakmana98@gmail.com', 'ynab iksp ftku jrhg') #created app password
             smtp.send_message(msg)
             print("Email sent successfully.")
     except Exception as e:
