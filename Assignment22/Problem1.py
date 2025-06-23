@@ -71,7 +71,7 @@ Total Duplicate Files Removed: {duplicates}
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
             smtp.starttls()
-            smtp.login('pathakmana98@gmail.com', 'Wishescometrue#7')
+            smtp.login('pathakmana98@gmail.com', 'ynab iksp ftku jrhg')#created app password
             smtp.send_message(msg)
             print("Email sent successfully.")
     except Exception as e:
@@ -80,7 +80,7 @@ Total Duplicate Files Removed: {duplicates}
 
 def main():
     if len(sys.argv) != 4:
-        print("Usage: DuplicateFileRemoval.py <Directory> <TimeIntervalInMinutes> <EmailID>")
+        print("Use: DuplicateFileRemoval.py <Directory> <TimeIntervalInMinutes> <EmailID>")
         return
 
     target_dir = sys.argv[1]
